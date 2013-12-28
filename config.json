@@ -1,0 +1,15 @@
+{
+    "db": {
+        "region": "us-east-1"
+      , "host": "fishingdbinstance.cngalenohjxn.us-east-1.rds.amazonaws.com"
+      , "port": 3306
+      , "dbName": "fishing"
+      , "username": "fisherman"
+      , "password": "fish#$man"
+    }
+  , "usgs": {
+        "apiBaseURL": "http://waterservices.usgs.gov/nwis/iv/"
+      , "defaultFetchPeriod": "P10D"
+      , "fetchFormat": "json"
+    }
+}

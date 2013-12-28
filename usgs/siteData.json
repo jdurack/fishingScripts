@@ -1,0 +1,14 @@
+{
+  "sites": [
+      {
+        "usgsId": 11526250
+      , "name": "TRINITY R A JUNCTION CITY CA"
+      , "type": "Stream"
+    }
+    , {
+        "usgsId": 11530080
+      , "name": "MILL C ABV MOUTH A HOOPA"
+      , "type": "Stream"
+    }
+  ]
+}
