@@ -21,6 +21,7 @@ db = MySQLdb.connect(
 
 dbCursor = db.cursor() 
 
+print('getting location metadata...')
 dbCursor.execute("SELECT locationId,usgsSiteId FROM Location WHERE isActive=1;")
 usgsSiteIdToLocationId = {}
 sites = ''
@@ -32,6 +33,7 @@ for row in dbCursor.fetchall():
   sites += usgsSiteId
   usgsSiteIdToLocationId[usgsSiteId] = locationId
 
+print('getting param metadata...')
 dbCursor.execute("SELECT paramId,usgsParameterCd FROM Param WHERE isActive=1;")
 usgsParameterCdToParamId = {}
 parameterCds = ''
@@ -61,6 +63,8 @@ apiParams['period'] = config['usgs']['defaultFetchPeriod']
 apiParams['parameterCd'] = parameterCds
 apiParams['sites'] = sites
 
+
+print('getting usgs data...')
 url = buildURL( config['usgs']['apiBaseURL'], apiParams )
 apiResponse = urllib2.urlopen(url)
 apiResponseString = apiResponse.read()
@@ -93,8 +97,10 @@ for timeSeriesSet in timeSeriesSets:
 count = 0
 batchSize = 100
 
-queryStartString = 'INSERT INTO usgsData (localDateTime,locationId,paramId,value) VALUES '
+queryStartString = 'INSERT INTO USGSData (localDateTime,locationId,paramId,value) VALUES '
 queryEndString = ' ON DUPLICATE KEY UPDATE value=VALUES(value);'
+
+print('upserting into db...')
 
 queryValues = ''
 for usgsDatum in usgsData:
@@ -117,4 +123,4 @@ for usgsDatum in usgsData:
     except:
       db.rollback()
 
-print('Done!')
+print('done!')
