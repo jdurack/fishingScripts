@@ -6,10 +6,19 @@
       , "dbName": "fishing"
       , "username": "fisherman"
       , "password": "fish#$man"
+      , "defaultBatchSize": 100
     }
   , "usgs": {
         "apiBaseURL": "http://waterservices.usgs.gov/nwis/iv/"
       , "defaultFetchPeriod": "P10D"
       , "fetchFormat": "json"
     }
+  , "forecastIO": {
+    "apiKey": "065a590cefb04d1ece74e13d86de9f29"
+  }
+  , "weatherUnderground": {
+      "apiBaseURL": "http://api.wunderground.com/api/"
+    , "apiKey": "beb64e8d472df60b"
+    , "daysToLookBack": 1
+  }
 }

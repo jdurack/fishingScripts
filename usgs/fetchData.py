@@ -94,8 +94,11 @@ for timeSeriesSet in timeSeriesSets:
     usgsDatum['paramId'] = paramId
     usgsData.append(usgsDatum)
 
+print('retreived ' + str(len(usgsData)) + ' usgs data points')
+
+
 count = 0
-batchSize = 100
+batchSize = config['db']['defaultBatchSize']
 
 queryStartString = 'INSERT INTO USGSData (localDateTime,locationId,paramId,value) VALUES '
 queryEndString = ' ON DUPLICATE KEY UPDATE value=VALUES(value);'
@@ -112,7 +115,7 @@ for usgsDatum in usgsData:
   queryValues += ',' + usgsDatum['paramId']
   queryValues += ',' + usgsDatum['value']
   queryValues += ')'
-  count += 100
+  count += 1
   if ( ( ( count % batchSize ) == 0 ) or ( count == len(usgsData) ) ):
     query = queryStartString + queryValues + queryEndString
     #pprint(query)
